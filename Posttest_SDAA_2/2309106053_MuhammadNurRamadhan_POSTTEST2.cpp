@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include <limits> // Untuk menghandle kesalahan input
+#include <limits>
 
 using namespace std;
 
@@ -11,23 +11,21 @@ struct Karyawan {
     string jabatan;
 };
 
-// Fungsi untuk validasi input integer
 int inputInteger() {
     int nilai;
     while (true) {
         cin >> nilai;
         if (cin.fail()) {
-            cin.clear(); // Menghapus flag error
-            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Mengabaikan input yang salah
+            cin.clear(); 
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
             cout << "Input tidak valid. Masukkan angka: ";
         } else {
-            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Bersihkan buffer input
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
             return nilai;
         }
     }
 }
 
-// Fungsi untuk menambah (create) karyawan baru
 void tambahKaryawan(Karyawan karyawan[], int &jumlah) {
     cout << "Masukkan ID Karyawan: ";
     karyawan[jumlah].id = inputInteger();
@@ -45,7 +43,6 @@ void tambahKaryawan(Karyawan karyawan[], int &jumlah) {
     cout << "Karyawan berhasil ditambahkan!\n";
 }
 
-// Fungsi untuk menampilkan (read) data semua karyawan
 void tampilkanKaryawan(const Karyawan karyawan[], int jumlah) {
     if (jumlah == 0) {
         cout << "Tidak ada data karyawan.\n";
@@ -60,7 +57,6 @@ void tampilkanKaryawan(const Karyawan karyawan[], int jumlah) {
     }
 }
 
-// Fungsi untuk memperbarui (update) data karyawan
 void perbaruiKaryawan(Karyawan karyawan[], int jumlah) {
     int id;
     cout << "Masukkan ID Karyawan yang ingin diperbarui: ";
@@ -84,7 +80,6 @@ void perbaruiKaryawan(Karyawan karyawan[], int jumlah) {
     cout << "ID Karyawan tidak ditemukan.\n";
 }
 
-// Fungsi untuk menghapus (delete) data karyawan berdasarkan ID
 void hapusKaryawan(Karyawan karyawan[], int &jumlah) {
     int id;
     cout << "Masukkan ID Karyawan yang ingin dihapus: ";
