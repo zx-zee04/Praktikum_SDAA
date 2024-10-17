@@ -312,6 +312,6 @@ int main() {
                 cout << "Pilihan tidak valid, coba lagi.\n";
         }
     } while (pilihan != 8);
-    
+
     return 0;
 }
