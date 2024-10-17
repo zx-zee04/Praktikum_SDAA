@@ -76,6 +76,37 @@ void tampilkanStack(Karyawan* top) {
     }
 }
 
+void updateKaryawan(Karyawan* head) {
+    if (head == nullptr) {
+        cout << "Tidak ada data karyawan.\n";
+        return;
+    }
+
+    int idCari;
+    cout << "Masukkan ID Karyawan yang ingin diperbarui: ";
+    idCari = inputInteger();
+
+    Karyawan* temp = head;
+    while (temp != nullptr) {
+        if (temp->id == idCari) {
+            cin.ignore();
+            cout << "Masukkan nama baru: ";
+            getline(cin, temp->nama);
+            cout << "Masukkan umur baru: ";
+            temp->umur = inputInteger();
+            cout << "Masukkan jabatan baru: ";
+            getline(cin, temp->jabatan);
+            cout << "Masukkan gaji baru: ";
+            temp->gaji = inputInteger();
+            cout << "Data karyawan berhasil diperbarui.\n";
+            return;
+        }
+        temp = temp->next;
+    }
+
+    cout << "ID Karyawan tidak ditemukan.\n";
+}
+
 void enqueueKaryawan(Karyawan* &front, Karyawan* &rear) {
     Karyawan* baru = new Karyawan;
     
@@ -272,12 +303,13 @@ int main() {
         cout << "\nSistem Pengelolaan Data Karyawan\n";
         cout << "1. Tambah Karyawan ke Stack\n";
         cout << "2. Tampilkan Karyawan di Stack\n";
-        cout << "3. Tambah Karyawan ke Queue\n";
-        cout << "4. Hapus Karyawan dari Queue\n";
-        cout << "5. Tampilkan Karyawan di Queue\n";
-        cout << "6. Urutkan Karyawan berdasarkan Gaji (Ascending - Merge Sort)\n";
-        cout << "7. Urutkan Karyawan berdasarkan Gaji (Descending - Quick Sort)\n";
-        cout << "8. Keluar\n";
+        cout << "3. Perbarui Karyawan di Stack\n";
+        cout << "4. Tambah Karyawan ke Queue\n";
+        cout << "5. Hapus Karyawan dari Queue\n";
+        cout << "6. Tampilkan Karyawan di Queue\n";
+        cout << "7. Urutkan Karyawan berdasarkan Gaji (Ascending - Merge Sort)\n";
+        cout << "8. Urutkan Karyawan berdasarkan Gaji (Descending - Quick Sort)\n";
+        cout << "9. Keluar\n";
         cout << "Masukkan pilihan Anda: ";
         pilihan = inputInteger();
         
@@ -289,29 +321,32 @@ int main() {
                 tampilkanStack(top);
                 break;
             case 3:
-                enqueueKaryawan(front, rear);
+                updateKaryawan(top);
                 break;
             case 4:
-                dequeueKaryawan(front, rear);
+                enqueueKaryawan(front, rear);
                 break;
             case 5:
-                tampilkanQueue(front);
+                dequeueKaryawan(front, rear);
                 break;
             case 6:
+                tampilkanQueue(front);
+                break;
+            case 7:
                 mergeSort(&top);
                 cout << "Karyawan berhasil diurutkan secara Ascending berdasarkan Gaji menggunakan Merge Sort.\n";
                 break;
-            case 7:
+            case 8:
                 quickSort(&top);
                 cout << "Karyawan berhasil diurutkan secara Descending berdasarkan Gaji menggunakan Quick Sort.\n";
                 break;
-            case 8:
+            case 9:
                 cout << "Keluar dari program...\n";
                 break;
             default:
                 cout << "Pilihan tidak valid, coba lagi.\n";
         }
-    } while (pilihan != 8);
-
+    } while (pilihan != 9);
+    
     return 0;
 }
